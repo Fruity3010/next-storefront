@@ -1,6 +1,7 @@
 'use cache';
 
 import { cacheLife } from 'next/cache';
+import { ProductSortField, SortOrder } from '@/enums/product';
 import type { CategoryApiData } from '@/types/category';
 import type { WithPagination } from '@/types/common';
 import type {
@@ -45,4 +46,22 @@ export async function getProduct(id: number): Promise<ProductApiData | null> {
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`DummyJSON ${res.status} for /products/${id}`);
   return res.json();
+}
+
+export async function getTopRatedProducts(limit: number) {
+  cacheLife('hours');
+  return request<WithPagination<ProductSummaryApiData>>(
+    `/products?${productListSearchParams({
+      limit,
+      skip: 0,
+      sortBy: ProductSortField.RATING,
+      order: SortOrder.DESC
+    })}`
+  );
+}
+
+export async function getCategory(slug: string) {
+  cacheLife('days');
+  const categories = await getCategories();
+  return categories.find(category => category.slug === slug) ?? null;
 }
