@@ -3,6 +3,7 @@ import { AvailabilityStatus } from '@/enums/product';
 import { typography } from '@/styles/typography';
 import type { ProductApiData } from '@/types/product';
 import { formatPrice } from '@/utilities/formatter';
+import AddToCartButton from '@/features/cart/addToCartButton';
 import ProductGallery from './productGallery';
 import Rating from './rating';
 
@@ -40,6 +41,15 @@ const ProductDetail = ({ product }: Props) => {
         >
           {product.availabilityStatus}
         </span>
+        <AddToCartButton
+          product={{
+            productId: product.id,
+            title: product.title,
+            price: product.price,
+            thumbnail: product.thumbnail,
+            stock: product.stock
+          }}
+        />
         <p className={`${typography.bodyMediumRegular} mt-6 text-grey-700`}>
           {product.description}
         </p>
@@ -75,6 +85,8 @@ export const ProductDetailSkeleton = () => {
         <Skeleton className="mt-3 h-4 w-20" />
         <Skeleton className="mt-6 h-9 w-28" />
         <Skeleton className="mt-3 h-6 w-20" />
+        <Skeleton className="mt-6 h-12 w-40" />
+        <Skeleton className="mt-3 h-5 w-48" />
         <Skeleton className="mt-6 h-24" />
         <Skeleton className="mt-8 h-24" />
       </div>

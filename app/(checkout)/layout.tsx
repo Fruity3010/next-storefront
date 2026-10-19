@@ -7,7 +7,7 @@ interface Props {
 const CheckoutLayout = ({ children }: Props) => {
   return (
     <>
-      <Header />
+      <Header showSearch={false} />
       <main className="flex-1 py-section">
         <Container width="narrow">{children}</Container>
       </main>
