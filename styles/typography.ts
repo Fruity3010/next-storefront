@@ -1,12 +1,15 @@
-export const text = {
-  display: "text-4xl font-semibold tracking-tight sm:text-5xl",
-  h1: "text-3xl font-semibold tracking-tight",
-  h2: "text-2xl font-semibold tracking-tight",
-  h3: "text-lg font-semibold",
-  body: "text-base leading-relaxed",
-  bodySm: "text-sm leading-relaxed",
-  caption: "text-xs text-muted",
-  label: "text-sm font-medium",
-  price: "text-lg font-semibold tabular-nums",
-  priceLg: "text-3xl font-semibold tabular-nums",
+export const typography = {
+  display01Bold: 'text-5xl font-bold tracking-tight',
+  display02Bold: 'text-4xl font-bold tracking-tight',
+  h3Semibold: 'text-3xl font-semibold tracking-tight',
+  h4Semibold: 'text-2xl font-semibold tracking-tight',
+  h6Semibold: 'text-lg font-semibold',
+  bodyLargeRegular: 'text-lg leading-relaxed',
+  bodyMediumRegular: 'text-base leading-relaxed',
+  bodyMediumMedium: 'text-base font-medium',
+  bodySmallRegular: 'text-sm leading-relaxed',
+  bodySmallMedium: 'text-sm font-medium',
+  captionSmall: 'text-xs',
+  priceMedium: 'text-lg font-semibold tabular-nums',
+  priceLarge: 'text-3xl font-semibold tabular-nums'
 } as const;

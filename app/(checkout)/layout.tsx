@@ -1,8 +1,10 @@
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
-import { Container } from "@/components/ui/Container";
+import { Container, Footer, Header } from '@/components/layout';
 
-export default function CheckoutLayout({ children }: { children: React.ReactNode }) {
+interface Props {
+  children: React.ReactNode;
+}
+
+const CheckoutLayout = ({ children }: Props) => {
   return (
     <>
       <Header />
@@ -12,4 +14,6 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
       <Footer />
     </>
   );
-}
+};
+
+export default CheckoutLayout;

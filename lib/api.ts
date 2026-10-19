@@ -1,14 +1,15 @@
-"use cache";
+'use cache';
 
-import { cacheLife } from "next/cache";
-import {
-  DUMMYJSON_URL,
-  productListParams,
-  type Category,
-  type Product,
-  type ProductPage,
-  type ProductQuery,
-} from "./dummyjson";
+import { cacheLife } from 'next/cache';
+import type { CategoryApiData } from '@/types/category';
+import type { WithPagination } from '@/types/common';
+import type {
+  ProductApiData,
+  ProductListQueryArgs,
+  ProductSummaryApiData
+} from '@/types/product';
+import { DUMMYJSON_URL } from '@/utilities/environment';
+import { productListSearchParams } from '@/utilities/urlSearchParams';
 
 async function request<T>(path: string): Promise<T> {
   const res = await fetch(`${DUMMYJSON_URL}${path}`);
@@ -17,25 +18,29 @@ async function request<T>(path: string): Promise<T> {
 }
 
 export async function getCategories() {
-  cacheLife("days");
-  const categories = await request<(Category & { url: string })[]>("/products/categories");
-  return categories.map(({ slug, name }): Category => ({ slug, name }));
+  cacheLife('days');
+  return request<CategoryApiData[]>('/products/categories');
 }
 
-export async function getProducts(query: ProductQuery) {
-  cacheLife("hours");
-  return request<ProductPage>(`/products?${productListParams(query)}`);
-}
-
-export async function getCategoryProducts(slug: string, query: ProductQuery) {
-  cacheLife("hours");
-  return request<ProductPage>(
-    `/products/category/${encodeURIComponent(slug)}?${productListParams(query)}`,
+export async function getProducts(query: ProductListQueryArgs) {
+  cacheLife('hours');
+  return request<WithPagination<ProductSummaryApiData>>(
+    `/products?${productListSearchParams(query)}`
   );
 }
 
-export async function getProduct(id: number): Promise<Product | null> {
-  cacheLife("hours");
+export async function getCategoryProducts(
+  slug: string,
+  query: ProductListQueryArgs
+) {
+  cacheLife('hours');
+  return request<WithPagination<ProductSummaryApiData>>(
+    `/products/category/${encodeURIComponent(slug)}?${productListSearchParams(query)}`
+  );
+}
+
+export async function getProduct(id: number): Promise<ProductApiData | null> {
+  cacheLife('hours');
   const res = await fetch(`${DUMMYJSON_URL}/products/${id}`);
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`DummyJSON ${res.status} for /products/${id}`);

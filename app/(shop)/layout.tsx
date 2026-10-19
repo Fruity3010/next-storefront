@@ -1,14 +1,19 @@
-import Link from "next/link";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
-import { Container } from "@/components/ui/Container";
-import { text } from "@/styles/typography";
+import Link from 'next/link';
+import { Container, Footer, Header } from '@/components/layout';
+import { typography } from '@/styles/typography';
 
-export default function ShopLayout({ children }: { children: React.ReactNode }) {
+interface Props {
+  children: React.ReactNode;
+}
+
+const ShopLayout = ({ children }: Props) => {
   return (
     <>
       <Header>
-        <Link href="/search" className={`${text.label} hover:text-primary`}>
+        <Link
+          href="/search"
+          className={`${typography.bodySmallMedium} hover:text-primary-600`}
+        >
           Search
         </Link>
       </Header>
@@ -18,4 +23,6 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
       <Footer />
     </>
   );
-}
+};
+
+export default ShopLayout;
