@@ -1,19 +1,19 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   images: {
-    remotePatterns: [new URL("https://cdn.dummyjson.com/**")],
+    remotePatterns: [new URL('https://cdn.dummyjson.com/**')]
   },
   turbopack: {
     rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
-  },
+      '*.css': {
+        loaders: ['@tailwindcss/turbopack'],
+        as: '*.css'
+      }
+    }
+  }
 };
 
 export default nextConfig;
