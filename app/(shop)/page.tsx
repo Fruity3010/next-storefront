@@ -1,5 +1,12 @@
 import { AsyncSection } from '@/components/feedback';
-import { CategoryList, CategoryListSkeleton } from '@/features/catalogue';
+import {
+  CategoryList,
+  CategoryListSkeleton
+} from '@/features/catalogue/categoryList';
+import FeaturedProducts, {
+  FEATURED_COUNT
+} from '@/features/catalogue/featuredProducts';
+import { ProductGridSkeleton } from '@/features/catalogue/productGrid';
 import { typography } from '@/styles/typography';
 
 const HomePage = () => {
@@ -21,6 +28,12 @@ const HomePage = () => {
         fallback={<CategoryListSkeleton />}
       >
         <CategoryList />
+      </AsyncSection>
+      <AsyncSection
+        title="Top rated"
+        fallback={<ProductGridSkeleton count={FEATURED_COUNT} />}
+      >
+        <FeaturedProducts />
       </AsyncSection>
     </>
   );

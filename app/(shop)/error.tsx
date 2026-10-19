@@ -1,20 +1,18 @@
 'use client';
 
-import { ErrorState } from '@/components/feedback';
+import { RouteError } from '@/components/feedback';
 
 interface Props {
   error: unknown;
   retry: () => void;
 }
 
-const ShopError = ({ retry }: Props) => {
+const ShopError = (props: Props) => {
   return (
-    <div className="py-section">
-      <ErrorState
-        message="We couldn't load this page. Please try again."
-        onRetry={retry}
-      />
-    </div>
+    <RouteError
+      {...props}
+      message="We couldn't load this page. Please try again."
+    />
   );
 };
 
